@@ -1,25 +1,30 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import LoadListContactInfo from './components/LoadListContactInfo';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import AddContactInfo from './components/AddContactInfo';
+import ViewDetailContactInfo from './components/ViewDetailContactInfo';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div>
+        <Navbar />
+        <h1>Practice Reactjs + Typescript contact ASP.net core API</h1>
+
+      </div>
+
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<LoadListContactInfo />} />
+          <Route path='/addContactInfo' element={< AddContactInfo />} />
+          <Route path='/viewDetailContactInfo/:id' element={< ViewDetailContactInfo/>}/>
+          <Route path="/home" element={<LoadListContactInfo />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
