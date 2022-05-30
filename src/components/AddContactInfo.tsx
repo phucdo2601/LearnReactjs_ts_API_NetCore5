@@ -6,18 +6,18 @@ import { Contact } from '../models/contact';
 
 const AddContactInfo = () => {
     //chuyen trang trong react-router-v6 in react-hook
-  let navigate = useNavigate();
-  const initContactState = {
-    id: "",
-    firstName: "", 
-    lastName: "",
-  };
+    let navigate = useNavigate();
+    const initContactState = {
+        id: "",
+        firstName: "",
+        lastName: "",
+    };
 
     const [firstName, setFirstName] = useState<string>();
     const [lastName, setLastName] = useState<string>();
 
-    const handleChangeInput = (event: ChangeEvent<HTMLInputElement>) : void => {
-        if (event.target.name ==="firstName") {
+    const handleChangeInput = (event: ChangeEvent<HTMLInputElement>): void => {
+        if (event.target.name === "firstName") {
             setFirstName(event.target.value);
         } else if (event.target.name === "lastName") {
             setLastName(event.target.value);
@@ -25,7 +25,7 @@ const AddContactInfo = () => {
     };
 
 
-    const addNewContactInfo = (event: any)=> {
+    const addNewContactInfo = (event: any) => {
         event.preventDefault();
         var data = {
             id: 0,
@@ -33,9 +33,9 @@ const AddContactInfo = () => {
             lastName: lastName as string,
         }
 
-        
 
-        window.alert(data.firstName +"-"+data.lastName);
+
+        window.alert(data.firstName + "-" + data.lastName);
         // contactsService.addNewContactInfo(data)
         //     .then((res) => {
         //         console.log(res.data);
@@ -44,15 +44,15 @@ const AddContactInfo = () => {
         //         console.log(e);
         //       });
 
-        contactsService.addNewContactInfo2(data.firstName, data.lastName)
-        .then((res) => {
-            console.log(res.data);
-            navigate("/");
-        }).catch((e: Error) => {
-            console.log(e);
-          });
+        contactsService.addNewContactInfo(data)
+            .then((res) => {
+                console.log(res.data);
+                navigate("/");
+            }).catch((e: Error) => {
+                console.log(e);
+            });
 
-        
+
     }
 
     const cancel = () => {
@@ -64,9 +64,9 @@ const AddContactInfo = () => {
             <Form>
                 <Form.Group className="mb-3" controlId="formBasicEmail" >
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control type="text" name="firstName" value={firstName} placeholder="Enter email" 
-                        onChange={(event: ChangeEvent<HTMLInputElement>) =>handleChangeInput(event)}
-                        />
+                    <Form.Control type="text" name="firstName" value={firstName} placeholder="Enter email"
+                        onChange={(event: ChangeEvent<HTMLInputElement>) => handleChangeInput(event)}
+                    />
                     <Form.Text className="text-muted">
                         We'll never share your email with anyone else.
                     </Form.Text>
@@ -74,21 +74,21 @@ const AddContactInfo = () => {
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="text" name="lastName" placeholder="Last Name" value={lastName} 
-                    onChange={(event: ChangeEvent<HTMLInputElement>) =>handleChangeInput(event)}/>
+                    <Form.Control type="text" name="lastName" placeholder="Last Name" value={lastName}
+                        onChange={(event: ChangeEvent<HTMLInputElement>) => handleChangeInput(event)} />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
                     <Form.Check type="checkbox" label="Check me out" />
                 </Form.Group>
-                <Button className="btn btn-success" variant="primary" onClick={(event:any) =>addNewContactInfo(event)} >
+                <Button className="btn btn-success" variant="primary" onClick={(event: any) => addNewContactInfo(event)} >
                     Submit
                 </Button>
                 <Button variant="primary" onClick={cancel} >
-                cancel
+                    cancel
                 </Button>
             </Form>
 
-{/* <div className="inputContainer">
+            {/* <div className="inputContainer">
           <input
             type="text"
             placeholder="Task..."

@@ -14,7 +14,7 @@ const ViewDetailContactInfo = () => {
     const initContact = {
         id: 0,
         firstName: "",
-        lastName: "string|any",
+        lastName: "",
     };
 
     const [contactInfo, setContactInfo] = useState<Contact>(initContact);

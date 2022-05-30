@@ -32,7 +32,7 @@ export class ContactInfoService {
      * Cach nay dang tim hieu va dang fix, (cach 2: nhap mot object)
      */
     addNewContactInfo(contact: Contact) {
-        return  axios.post("https://localhost:44352/api/Contacts", { contact });
+        return  axios.post("https://localhost:44352/api/Contacts", contact);
     }
 
     /**
