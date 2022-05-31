@@ -12,6 +12,10 @@ namespace LearnNetCoreAPIReact02.Wrapper
         public int TotalRecords { get; set; }
         public Uri NextPage { get; set; }
         public Uri PreviousPage { get; set; }
+        public int FirstPageNum { get; set; }   
+        public int LastPageNum { get; set; }
+        public int NextPageNum { get; set; }    
+        public int PreviousPageNum { get; set; }    
 
         public PagedResponse(T data, int pageNumber, int pageSize)
         {

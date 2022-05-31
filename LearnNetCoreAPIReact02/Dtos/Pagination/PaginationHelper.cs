@@ -24,6 +24,10 @@ namespace LearnNetCoreAPIReact02.Dtos.Pagination
             respose.LastPage = uriService.GetPageUri(new PaginationParams(roundedTotalPages, validFilter.PageSize), route);
             respose.TotalPages = roundedTotalPages;
             respose.TotalRecords = totalRecords;
+            respose.FirstPageNum = 1;
+            respose.LastPageNum = roundedTotalPages;
+            respose.NextPageNum = validFilter.PageNumber >= 1 && validFilter.PageNumber < roundedTotalPages ? validFilter.PageNumber + 1 : 0;
+            respose.PreviousPageNum = validFilter.PageNumber - 1 >= 1 && validFilter.PageNumber <= roundedTotalPages ? validFilter.PageNumber - 1 : 0;
             return respose;
         }
     }
