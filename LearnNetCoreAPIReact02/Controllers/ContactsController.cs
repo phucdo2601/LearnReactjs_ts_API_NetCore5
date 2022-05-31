@@ -10,6 +10,7 @@ using LearnNetCoreAPIReact02.Dtos.Pagination;
 using LearnNetCoreAPIReact02.Dtos;
 using System.Text.Json;
 using LearnNetCoreAPIReact02.Wrapper;
+using LearnNetCoreAPIReact02.Service;
 
 namespace LearnNetCoreAPIReact02.Controllers
 {
@@ -18,10 +19,12 @@ namespace LearnNetCoreAPIReact02.Controllers
     public class ContactsController : ControllerBase
     {
         private readonly DatabaseContext _context;
+        private readonly IUriService uriService;
 
-        public ContactsController(DatabaseContext context)
+        public ContactsController(DatabaseContext context, IUriService uriService)
         {
             _context = context;
+            this.uriService = uriService;
         }
 
         // GET: api/Contacts
@@ -93,7 +96,7 @@ namespace LearnNetCoreAPIReact02.Controllers
         public async Task<ActionResult<IEnumerable<Contact>>> GetContactsPageFulRes([FromQuery] PaginationParams @params)
         {
             /* return await _context.Contacts.ToListAsync();*/
-
+            var route = Request.Path.Value;
 
             var validFilter = new PaginationParams(@params.PageNumber, @params.PageSize);
 
@@ -110,9 +113,11 @@ namespace LearnNetCoreAPIReact02.Controllers
 
             var tottalRecords = await _context.Contacts.CountAsync();
 
-            /*var pagedResponse = PaginationHelper.CreatePagedReponse<Contact>(items, validFilter, tottalRecords, uriService, route);*/
+            var pagedResponse = PaginationHelper.CreatePagedReponse<Contact>(items, validFilter, tottalRecords, uriService, route);
 
-            return Ok(new PagedResponse<List<Contact>>(items, validFilter.PageNumber, validFilter.PageSize, tottalRecords));
+          /*  return Ok(new PagedResponse<List<Contact>>(items, validFilter.PageNumber, validFilter.PageSize, tottalRecords));*/
+
+            return Ok(pagedResponse);
         }
 
         // GET: api/Contacts/5

@@ -1,6 +1,8 @@
 using LearnNetCoreAPIReact02.Models;
+using LearnNetCoreAPIReact02.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -34,6 +36,18 @@ namespace LearnNetCoreAPIReact02
              * Add DbConnectiom string on Startup.cs
              */
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DbConnection")));
+
+            /**
+             * Add Uri Service on pagination method in asp net core api
+             */
+            services.AddHttpContextAccessor();
+            services.AddSingleton<IUriService>(o =>
+            {
+                var accessor = o.GetRequiredService<IHttpContextAccessor>();
+                var request = accessor.HttpContext.Request;
+                var uri = string.Concat(request.Scheme, "://", request.Host.ToUriComponent());
+                return new UriService(uri);
+            });
 
             /**
              * Enable Reactjs call API in ASP.Net core
