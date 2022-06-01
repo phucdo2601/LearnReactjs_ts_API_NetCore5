@@ -12,6 +12,8 @@ const LoadListContactInfo = () => {
 
     const [contactList, setContactList] = useState<Array<Contact>>([]);
 
+    const [pageSize, setPageSize] = useState<number>(5);
+
     const getAllContactInfo = () => {
         contactsService.getAllContacts()
             .then((res) => {
@@ -102,12 +104,8 @@ const LoadListContactInfo = () => {
         },
     ];
 
-
-
-
-
-    const handleViewDetail = (id: number) => {
-
+    const onPageSizeChanging = (newPageSize: number) => {
+        setPageSize(newPageSize)
     }
 
     return (
@@ -166,13 +164,16 @@ const LoadListContactInfo = () => {
                 </tbody>
             </table> */}
 
-            <div style={{ height: 400, width: '100%' }}>
+            <div style={{ height: 500, width: '100%' }}>
                 <DataGrid
                     rows={contactList}
                     columns={columns}
-                    pageSize={5}
-                    rowsPerPageOptions={[5]}
                     checkboxSelection
+                    //turn on pagination on datagird
+                    pageSize={pageSize}
+                    rowsPerPageOptions={[5, 10, 15]}
+                    onPageSizeChange={(newPageSize) => onPageSizeChanging(newPageSize)}
+                    pagination
                 // disableSelectionOnClick
 
                 />
