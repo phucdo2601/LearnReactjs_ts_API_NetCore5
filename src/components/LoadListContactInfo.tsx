@@ -17,7 +17,7 @@ const LoadListContactInfo = () => {
     const getAllContactInfo = () => {
         contactsService.getAllContacts()
             .then((res) => {
-                console.log(res.data);
+                // console.log(res.data);
                 setContactList(res.data);
 
 
@@ -48,14 +48,12 @@ const LoadListContactInfo = () => {
             });
     }
 
-    const id = "id";
-
     /**
     * Test Material x-data-grid
     */
 
     const columns: GridColDef[] = [
-        { field: id, headerName: 'ID', width: 90 },
+        { field: "id", headerName: 'ID', width: 90 },
         {
             field: 'firstName',
             headerName: 'First name',
@@ -82,7 +80,7 @@ const LoadListContactInfo = () => {
             headerName: "Action",
             width: 200,
             renderCell: (params) => {
-                console.log(params);
+                // console.log(params);
 
                 return (
                     <div className="cellAction">
@@ -104,9 +102,43 @@ const LoadListContactInfo = () => {
         },
     ];
 
-    const onPageSizeChanging = (newPageSize: number) => {
-        setPageSize(newPageSize)
+    /**
+     * ham auto generate password theo chuan dat dat password
+     */
+    const [password, setPassword] = useState("");
+
+    const autoGeneratePass = () => {
+        var result: string = "";
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
+        var charactersLength: number = characters.length;
+        var patternPass = `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`;
+        while (!result.match("^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$")) {
+            for (var i = 0; i < 20; i++) {
+                result += characters.charAt(Math.floor(Math.random() *
+                    charactersLength));
+                if (result.match(patternPass) && result.length === 20) {
+                    break;
+                } else {
+                    continue;
+                }
+            }
+        }
+
+        // alert(result);
+        setPassword(result);
+        console.log(result);
+
+        return result;
     }
+
+    const onPageSizeChanging = (newPageSize: number) => {
+        setPageSize(newPageSize);
+
+    }
+
+
+
+
 
     return (
         <>
@@ -114,6 +146,12 @@ const LoadListContactInfo = () => {
                 <NavLink to="/AddContactInfo" className="btn btn-primary">Add New Contact Info</NavLink>
             </div>
             <hr />
+            <button onClick={autoGeneratePass}>Auto Generate Password</button>
+            <input type="text" value={password} />
+            <hr />
+            <div>
+
+            </div>
             {/* <table>
                 <thead>
                     <tr>
@@ -164,6 +202,21 @@ const LoadListContactInfo = () => {
                 </tbody>
             </table> */}
 
+            {/* table-view data-grid can ban cua material ui  */}
+            {/* <div style={{ height: 400, width: '100%' }}>
+                <DataGrid
+                    rows={contactList}
+                    columns={columns}
+                    pageSize={5}
+                    rowsPerPageOptions={[5]}
+                    checkboxSelection
+                // disableSelectionOnClick
+
+                />
+            </div> */}
+
+
+            {/* display data paging using mui-datagrid */}
             <div style={{ height: 500, width: '100%' }}>
                 <DataGrid
                     rows={contactList}
