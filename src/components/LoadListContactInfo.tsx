@@ -105,13 +105,15 @@ const LoadListContactInfo = () => {
     /**
      * ham auto generate password theo chuan dat dat password
      */
-    const [password, setPassword] = useState("");
+    const [password, setPassword] = useState<string>("");
+    const [warningText, setWarningText] = useState<string>("");
+    var patternPass = `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`;
 
     const autoGeneratePass = () => {
         var result: string = "";
         var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
         var charactersLength: number = characters.length;
-        var patternPass = `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`;
+        // var patternPass = `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`;
         while (!result.match("^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$")) {
             for (var i = 0; i < 20; i++) {
                 result += characters.charAt(Math.floor(Math.random() *
@@ -137,7 +139,13 @@ const LoadListContactInfo = () => {
     }
 
 
-
+    const disableOrEnableAutoGen = (): boolean => {
+        if (password.match(patternPass)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 
     return (
@@ -146,8 +154,17 @@ const LoadListContactInfo = () => {
                 <NavLink to="/AddContactInfo" className="btn btn-primary">Add New Contact Info</NavLink>
             </div>
             <hr />
-            <button onClick={autoGeneratePass}>Auto Generate Password</button>
-            <input type="text" value={password} />
+            <button onClick={autoGeneratePass}
+                disabled={disableOrEnableAutoGen()}
+            >Auto Generate Password</button>
+            <input type="text" value={password} style={{ width: "300px" }} />
+            {
+                disableOrEnableAutoGen() === true ? (
+                    <p></p>
+                ) : (
+                    <p> Auto generating is not match with the password standard. Please Click 'Auto Generate Password' again! </p>
+                )
+            }
             <hr />
             <div>
 
