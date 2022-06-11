@@ -192,6 +192,19 @@ namespace LearnNetCoreAPIReact02.Controllers
             return NoContent();
         }
 
+        //Find contacts by firstName
+        [HttpGet("findLike")]
+        public async Task<IActionResult> GetContactByFirstName([FromQuery] string firstName)
+        {
+            var result = await _context.Contacts.Where(x => x.FirstName.Contains(firstName)).ToListAsync();
+            if (result != null)
+            {
+                return Ok(result);
+            }
+
+            return NoContent();
+        }
+
         private bool ContactExists(int id)
         {
             return _context.Contacts.Any(e => e.Id == id);
