@@ -1,0 +1,53 @@
+- Redux dung de quann ly cac state (co the goi la cac  bien) dung chung, khai bao mot lan, goi khi can su dung, doi phai khai bao lai o cac component, tranh viec overload
+- De su dung redux trong du an react co san cai ba thu vien nhu sau: yarn add redux react-redux @reduxjs/toolkit
+- Sau Khi cai dat xong thu vien, bat dau setup cau truc cua du an.
+- O Du An nay minh chu yeu tim hieu ve redux-toolkit. no cung tua nhu redux nhung de trien khai hon
+    - B1: khai bao mot thu muc ten la redux, chua cac store luu tru
+
+
+- Co the handle api gui len thong qua redux toolkit query, redux sage, redux thunk, cung co the handle bang redux thuong
+
+- O project nay tui su dung react-toolkit (createAsyncThunk) chho viec su ly cac tac vu voi api 
+- file store.ts:
+-------------------------------------------------------------------------
+        import { configureStore } from "@reduxjs/toolkit";
+        import ContactInfoSlice from "../slices/contactInfoSlice";
+
+        const reducer = {
+        contacts: ContactInfoSlice,
+        };
+
+        const store = configureStore({
+        reducer: {
+            contacts: ContactInfoSlice,
+        },
+        devTools: true,
+        });
+
+        type StoreType = typeof store;
+        export type AppDispatch = StoreType['dispatch'];
+
+        type Config = {
+        dispatch: AppDispatch;
+        };
+
+        export type RootState = ReturnType<typeof store.getState>
+--------------------------------------------------------------------------------
+export default store;
+-Trong file store cua redux, doi voi ts, phai cau hinh them AppDispatch de khong bi bao loi:
+    type StoreType = typeof store;
+    export type AppDispatch = StoreType['dispatch'];
+
+    type Config = {
+    dispatch: AppDispatch;
+    };
+
+- Cau Hinh them RootState de co them cham goi cac reduer mot cach de dang:
+    export type RootState = ReturnType<typeof store.getState>
+
+- Redux toolkir co 3 trang thai can chu y: 
+        pending(dang tt), 
+        fulfilled(da load dl), -- load data chu yeu su dung cai nay
+        rejected(bi tu choi- xay ra loi)
+(Cac ban co the doc tai lieu de tim hieu them o trang cua redux)
+- Hoac co the tham khao link nay : https://www.bezkoder.com/redux-toolkit-crud-react-hooks/?__cf_chl_tk=OT3HnrGe_Lwr3LdsIGqTeZuqfEO4p6oUYXhCajFdrHs-1655025573-0-gaNycGzNCmU
