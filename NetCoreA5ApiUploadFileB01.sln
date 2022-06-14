@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32407.343
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCoreA5ApiUploadFileB01", "NetCoreA5ApiUploadFileB01\NetCoreA5ApiUploadFileB01.csproj", "{8360A1EB-4AC9-4885-83B7-23F256531F39}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8360A1EB-4AC9-4885-83B7-23F256531F39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8360A1EB-4AC9-4885-83B7-23F256531F39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8360A1EB-4AC9-4885-83B7-23F256531F39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8360A1EB-4AC9-4885-83B7-23F256531F39}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BE799D02-FDBB-47B4-814E-1CF7FC07B63C}
+	EndGlobalSection
+EndGlobal
