@@ -104,7 +104,10 @@ const contactInfoSlice = createSlice({
         })
 
         builder.addCase(retrieveContacts.fulfilled, (state : Array<ContactModel>, action: PayloadAction<any>) => {
-            state.push(...action.payload);
+            //co the load list data from api theo cach nay 
+            // state.push(...action.payload);
+            //hooac theo cach nay 
+            return [...action.payload];
 
         })
 
