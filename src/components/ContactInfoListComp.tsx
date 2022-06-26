@@ -4,6 +4,10 @@ import { deleteAllContactInfo, findContactInfosByTitle, retrieveContacts } from 
 import { ContactModel } from '../models/ContactModel';
 import { Link } from 'react-router-dom';
 import { AppDispatch, RootState } from '../redux/stores/store';
+import { toast } from 'react-toastify';
+import ContactInfoApi from '../apis/ContactInfoApi';
+import initAxios from '../apis/http-common';
+import { AxiosError, AxiosResponse } from 'axios';
 
 const initContactState = {
     id: 0,
@@ -16,6 +20,8 @@ const ContactInfoListComp = () => {
     const [currentIndex, setCurrentIndex] = useState(-1);
     const [searchTitle, setSearchTitle] = useState("");
 
+    const [listInfo, setListInfo] = useState<ContactModel[]>([]);
+
     const contacts = useSelector((state: RootState) => state.contacts);
     const dispatch = useDispatch<AppDispatch>();
 
@@ -24,6 +30,9 @@ const ContactInfoListComp = () => {
         setSearchTitle(searchTitle);
     };
 
+    /**
+     * Doc du lieu bang redux tool kit
+     */
     const initFetch = useCallback(() => {
         dispatch(retrieveContacts());
     }, [dispatch]);
@@ -36,6 +45,28 @@ const ContactInfoListComp = () => {
         setCurrentTutorial(initContactState);
         setCurrentIndex(-1);
     };
+
+    useEffect(() => {
+        const getAllInfos = () => {
+            const id = toast.loading("Please wait...")
+            ContactInfoApi.getAll()
+                .then((res: AxiosResponse) => {
+                    if (res.status === 200) {
+                        toast.update(id, { render: "All is good", type: "success", isLoading: false, autoClose: 2000 });
+                    }
+                    if (res.status === 404) {
+                        toast.update(id, { render: "Something went wrong", type: "warning", isLoading: false, autoClose: 2000 });
+                    }
+                }).catch((err: AxiosError) => {
+                    if (err.response?.status === 404) {
+                        toast.update(id, { render: "Something went wrong", type: "warning", isLoading: false, autoClose: 2000 });
+                    }
+
+                });
+        }
+        getAllInfos();
+
+    }, []);
 
     const setActiveTutorial = (contact: React.SetStateAction<any>, index: number) => {
         setCurrentTutorial(contact);
