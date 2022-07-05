@@ -66,25 +66,25 @@ const ViewDetailContactInfo = () => {
 
     return (
         <>
-            <Form>
+            <Form style={{ width: '50%', position: 'absolute', display: 'block', alignItems: "center", justifyContent: 'center' }}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
+                    <Form.Label>First Name</Form.Label>
                     <Form.Control type="text" name="firstName" value={contactInfo?.firstName} placeholder="Enter email"
                         onChange={handleInputChange}
                     />
-                    <Form.Text className="text-muted">
+                    {/* <Form.Text className="text-muted">
                         We'll never share your email with anyone else.
-                    </Form.Text>
+                    </Form.Text> */}
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label>Last Name</Form.Label>
                     <Form.Control type="text" name="lastName" placeholder="Last Name" value={contactInfo?.lastName}
                         onChange={handleInputChange} />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
                     <Form.Check type="checkbox" label="Check me out" />
-                </Form.Group>
+                </Form.Group> */}
                 <Button variant="primary" onClick={handleUpdateContactInfo}>
                     Update
                 </Button>
