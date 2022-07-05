@@ -1,9 +1,13 @@
+import { Divider, IconButton, InputBase, Paper } from '@mui/material';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom';
-import { Contact } from '../models/contact'
+import { Contact } from '../models/contact';
 import contactsService from '../services/ContactInfoService';
-
+import MenuIcon from '@mui/icons-material/Menu';
+import SearchIcon from '@mui/icons-material/Search';
+import DirectionsIcon from '@mui/icons-material/Directions';
+import "./loadListContactInfo.scss";
 
 const LoadListContactInfo = () => {
 
@@ -13,6 +17,12 @@ const LoadListContactInfo = () => {
     const [contactList, setContactList] = useState<Array<Contact>>([]);
 
     const [pageSize, setPageSize] = useState<number>(5);
+
+    //value search
+    const [searched, setSearched] = useState<string>("");
+
+    //list value search
+    const [filtererResults, setFiltererResults] = useState<Array<Contact>>([]);
 
     const getAllContactInfo = () => {
         contactsService.getAllContacts()
@@ -85,7 +95,7 @@ const LoadListContactInfo = () => {
                 return (
                     <div className="cellAction">
                         <NavLink to={`/viewDetailContactInfo/${params.id}`} style={{ textDecoration: "none" }}>
-                            <div className="viewButton">View</div>
+                            <div className="btn btn-warning">View</div>
                         </NavLink>
                         <div
                             className="deleteButton"
@@ -146,6 +156,44 @@ const LoadListContactInfo = () => {
             return false;
         }
     }
+
+    const requestSearch = (e: any) => {
+        e.preventDefault();
+        // alert(`Searching succcessfully ${searched}`)
+        if (searched !== "") {
+            let newData = [...contactList];
+            const filteredData = newData.filter((item) => {
+                return Object.values(item)
+                    .join("")
+                    .toLowerCase()
+                    .includes(searched.toLowerCase());
+            });
+            setFiltererResults(filteredData);
+        } else {
+            setFiltererResults(contactList);
+        }
+    };
+
+    const requestSearch2 = (searchedVal: string) => {
+        setSearched(searchedVal);
+        if (searched !== "") {
+            let newData = [...contactList];
+            const filteredData = newData.filter((item) => {
+                return Object.values(item)
+                    .join("")
+                    .toLowerCase()
+                    .includes(searched.toLowerCase());
+            });
+            setFiltererResults(filteredData);
+        } else {
+            setFiltererResults(contactList);
+        }
+    }
+
+    // const cancelSearch = () => {
+    //     setSearched("");
+    //     requestSearch();
+    // };
 
 
     return (
@@ -232,9 +280,70 @@ const LoadListContactInfo = () => {
                 />
             </div> */}
 
+            <Paper
+                component="form"
+                sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 }}
+            >
+                <IconButton sx={{ p: '10px' }} aria-label="menu">
+                    <MenuIcon />
+                </IconButton>
+                <InputBase
+                    sx={{ ml: 1, flex: 1 }}
+                    placeholder="Search Google Maps"
+                    inputProps={{ 'aria-label': 'search google maps' }}
+                    value={searched}
+                    onChange={(e: any) => requestSearch2(e.target.value)}
+                />
+                {/* <IconButton type="submit" sx={{ p: '10px' }} aria-label="search" onClick={() => requestSearch(searched)}  >
+                    <SearchIcon />
+                </IconButton> */}
+
+                <button type="submit" onClick={(e: any) => requestSearch(e)} >Search</button>
+
+            </Paper>
 
             {/* display data paging using mui-datagrid */}
-            <div style={{ height: 500, width: '100%' }}>
+            {
+                searched.length > 1 ? (
+                    <>
+                        <div className="datatable">
+
+                            <DataGrid
+                                rows={filtererResults}
+                                columns={columns}
+                                checkboxSelection
+                                //turn on pagination on datagird
+                                pageSize={pageSize}
+                                rowsPerPageOptions={[5, 10, 15]}
+                                onPageSizeChange={(newPageSize) => onPageSizeChanging(newPageSize)}
+                                pagination
+                            // disableSelectionOnClick
+
+                            />
+
+                        </div>
+                    </>
+                ) : (
+                    <>
+                        <div className="datatable">
+                            <DataGrid
+                                rows={contactList}
+                                columns={columns}
+                                checkboxSelection
+                                //turn on pagination on datagird
+                                pageSize={pageSize}
+                                rowsPerPageOptions={[5, 10, 15]}
+                                onPageSizeChange={(newPageSize) => onPageSizeChanging(newPageSize)}
+                                pagination
+                            // disableSelectionOnClick
+
+                            />
+                        </div>
+                    </>
+                )
+            }
+
+            {/* <div style={{ height: 500, width: '100%' }}>
                 <DataGrid
                     rows={contactList}
                     columns={columns}
@@ -247,7 +356,7 @@ const LoadListContactInfo = () => {
                 // disableSelectionOnClick
 
                 />
-            </div>
+            </div> */}
         </>
     )
 }
