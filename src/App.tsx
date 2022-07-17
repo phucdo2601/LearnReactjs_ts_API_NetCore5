@@ -6,6 +6,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AddContactInfo from './components/AddContactInfo';
 import ViewDetailContactInfo from './components/ViewDetailContactInfo';
 import Navbar from './components/Navbar';
+import AddNewConDynamicForm from './components/DynamicForm.tsx/AddNewConDynamicForm';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
@@ -20,10 +23,26 @@ function App() {
         <Routes>
           <Route path="/" element={<LoadListContactInfo />} />
           <Route path='/addContactInfo' element={< AddContactInfo />} />
-          <Route path='/viewDetailContactInfo/:id' element={< ViewDetailContactInfo/>}/>
+          <Route path='/viewDetailContactInfo/:id' element={< ViewDetailContactInfo />} />
           <Route path="/home" element={<LoadListContactInfo />} />
+          <Route path="/demo-react-hock-form-val" element={<AddNewConDynamicForm />} />
+
         </Routes>
       </BrowserRouter>
+
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      {/* Same as */}
+      <ToastContainer />
     </>
   );
 }

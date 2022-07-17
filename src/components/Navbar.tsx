@@ -14,6 +14,10 @@ const Navbar = () => {
                         <a className="nav-item nav-link active" href="/home">Home </a>
                         
                     </div>
+                    <div className="navbar-nav">
+                        <a className="nav-item nav-link active" href="/demo-react-hock-form-val">Demo-Dynamic-form </a>
+                        
+                    </div>
                 </div>
             </nav>
 

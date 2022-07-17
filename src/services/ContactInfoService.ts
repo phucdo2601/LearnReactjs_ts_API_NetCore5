@@ -35,6 +35,10 @@ export class ContactInfoService {
         return  axios.post("https://localhost:44352/api/Contacts", contact);
     }
 
+    addNewListContactInfo(contactList: Contact[]) {
+        return  axios.post("https://localhost:44352/api/Contacts/addListData", contactList);
+    }
+
     /**
      * Delete contact info
      */
