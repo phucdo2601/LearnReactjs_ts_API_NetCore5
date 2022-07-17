@@ -115,7 +115,7 @@ namespace LearnNetCoreAPIReact02.Controllers
 
             var pagedResponse = PaginationHelper.CreatePagedReponse<Contact>(items, validFilter, tottalRecords, uriService, route);
 
-          /*  return Ok(new PagedResponse<List<Contact>>(items, validFilter.PageNumber, validFilter.PageSize, tottalRecords));*/
+            /*  return Ok(new PagedResponse<List<Contact>>(items, validFilter.PageNumber, validFilter.PageSize, tottalRecords));*/
 
             return Ok(pagedResponse);
         }
@@ -174,6 +174,36 @@ namespace LearnNetCoreAPIReact02.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetContact", new { id = contact.Id }, contact);
+        }
+
+        //add list data
+        [HttpPost("addListData")]
+        public async Task<ActionResult<Contact>> PostListContact(List<Contact> listContact)
+        {
+
+            foreach (Contact c in listContact)
+            {
+                c.Id = 0;
+                _context.Contacts.Add(c);
+            }
+            await _context.SaveChangesAsync();
+
+            List<Contact> listResponse = new List<Contact>();
+            listResponse.Clear();
+
+            foreach (Contact c in listContact)
+            {
+                var id = c.Id;
+                var firstName = c.FirstName;
+                var lastName = c.LastName;
+                Contact contact = new Contact();
+                contact.Id = id;
+                contact.FirstName = firstName;
+                contact.LastName = lastName;
+                listResponse.Add(contact);
+            }
+
+            return Ok(listResponse);
         }
 
         // DELETE: api/Contacts/5
