@@ -1,0 +1,12 @@
+D:\TuHocLapTrinh\CSharp\RestAPI\learn\v5\yourSelf\Basic\LApiNetCore5SendMailB01\EmailService\obj\Debug\net5.0\EmailService.csproj.AssemblyReference.cache
+D:\TuHocLapTrinh\CSharp\RestAPI\learn\v5\yourSelf\Basic\LApiNetCore5SendMailB01\EmailService\obj\Debug\net5.0\EmailService.GeneratedMSBuildEditorConfig.editorconfig
+D:\TuHocLapTrinh\CSharp\RestAPI\learn\v5\yourSelf\Basic\LApiNetCore5SendMailB01\EmailService\obj\Debug\net5.0\EmailService.AssemblyInfoInputs.cache
+D:\TuHocLapTrinh\CSharp\RestAPI\learn\v5\yourSelf\Basic\LApiNetCore5SendMailB01\EmailService\obj\Debug\net5.0\EmailService.AssemblyInfo.cs
+D:\TuHocLapTrinh\CSharp\RestAPI\learn\v5\yourSelf\Basic\LApiNetCore5SendMailB01\EmailService\obj\Debug\net5.0\EmailService.csproj.CoreCompileInputs.cache
+D:\TuHocLapTrinh\CSharp\RestAPI\learn\v5\yourSelf\Basic\LApiNetCore5SendMailB01\EmailService\bin\Debug\net5.0\EmailService.deps.json
+D:\TuHocLapTrinh\CSharp\RestAPI\learn\v5\yourSelf\Basic\LApiNetCore5SendMailB01\EmailService\bin\Debug\net5.0\EmailService.dll
+D:\TuHocLapTrinh\CSharp\RestAPI\learn\v5\yourSelf\Basic\LApiNetCore5SendMailB01\EmailService\bin\Debug\net5.0\EmailService.pdb
+D:\TuHocLapTrinh\CSharp\RestAPI\learn\v5\yourSelf\Basic\LApiNetCore5SendMailB01\EmailService\obj\Debug\net5.0\EmailService.dll
+D:\TuHocLapTrinh\CSharp\RestAPI\learn\v5\yourSelf\Basic\LApiNetCore5SendMailB01\EmailService\obj\Debug\net5.0\refint\EmailService.dll
+D:\TuHocLapTrinh\CSharp\RestAPI\learn\v5\yourSelf\Basic\LApiNetCore5SendMailB01\EmailService\obj\Debug\net5.0\EmailService.pdb
+D:\TuHocLapTrinh\CSharp\RestAPI\learn\v5\yourSelf\Basic\LApiNetCore5SendMailB01\EmailService\obj\Debug\net5.0\ref\EmailService.dll
